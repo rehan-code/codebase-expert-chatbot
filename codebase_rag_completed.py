@@ -157,16 +157,16 @@ embeddings
 """
 
 # Set the PINECONE_API_KEY as an environment variable
-# pinecone_api_key = os.environ.get("PINECONE_API_KEY")
+# pinecone_api_key = userdata.get("PINECONE_API_KEY")
 # os.environ['PINECONE_API_KEY'] = pinecone_api_key
 
 # Initialize Pinecone
 pc = Pinecone(api_key=os.environ.get("PINECONE_API_KEY"),)
 
 # Connect to your Pinecone index
-pinecone_index = pc.Index("codebase-rag")
+pinecone_index = pc.Index("codebase-chatbot")
 
-vectorstore = PineconeVectorStore(index_name="codebase-rag", embedding=HuggingFaceEmbeddings())
+vectorstore = PineconeVectorStore(index_name="codebase-chatbot", embedding=HuggingFaceEmbeddings())
 
 documents = []
 
@@ -182,7 +182,7 @@ for file in file_content:
 vectorstore = PineconeVectorStore.from_documents(
     documents=documents,
     embedding=HuggingFaceEmbeddings(),
-    index_name="codebase-rag",
+    index_name="codebase-chatbot",
     namespace="https://github.com/CoderAgent/SecureAgent"
 )
 
