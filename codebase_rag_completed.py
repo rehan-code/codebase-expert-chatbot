@@ -252,7 +252,7 @@ def perform_rag(query):
     contexts = [item['metadata']['text'] for item in top_matches['matches']]
 
     augmented_query = "<CONTEXT>\n" + "\n\n-------\n\n".join(contexts[ : 10]) + "\n-------\n</CONTEXT>\n\n\n\nMY QUESTION:\n" + query
-
+    print(augmented_query)
     # Modify the prompt below as need to improve the response quality
     system_prompt = f"""You are a Senior Software Engineer, specializing in TypeScript.
 
