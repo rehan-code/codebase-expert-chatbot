@@ -22,7 +22,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from langchain_pinecone import PineconeVectorStore
 from langchain.embeddings import OpenAIEmbeddings
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from google.colab import userdata
+# from google.colab import userdata
 from pinecone import Pinecone
 import os
 import tempfile
@@ -49,7 +49,8 @@ def clone_repository(repo_url):
     Repo.clone_from(repo_url, str(repo_path))
     return str(repo_path)
 
-path = clone_repository("https://github.com/CoderAgent/SecureAgent")
+# path = clone_repository("https://github.com/CoderAgent/SecureAgent")
+path = "/content/SecureAgent"
 
 print(path)
 
@@ -156,11 +157,11 @@ embeddings
 """
 
 # Set the PINECONE_API_KEY as an environment variable
-pinecone_api_key = userdata.get("PINECONE_API_KEY")
-os.environ['PINECONE_API_KEY'] = pinecone_api_key
+# pinecone_api_key = os.environ.get("PINECONE_API_KEY")
+# os.environ['PINECONE_API_KEY'] = pinecone_api_key
 
 # Initialize Pinecone
-pc = Pinecone(api_key=userdata.get("PINECONE_API_KEY"),)
+pc = Pinecone(api_key=os.environ.get("PINECONE_API_KEY"),)
 
 # Connect to your Pinecone index
 pinecone_index = pc.Index("codebase-rag")
@@ -199,7 +200,7 @@ vectorstore = PineconeVectorStore.from_documents(
 
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=userdata.get("GROQ_API_KEY")
+    api_key=os.environ.get("GROQ_API_KEY")
 )
 
 query = "How are python files parsed?"
