@@ -50,9 +50,9 @@ def clone_repository(repo_url):
     return str(repo_path)
 
 # path = clone_repository("https://github.com/CoderAgent/SecureAgent")
-path = "/content/SecureAgent"
+path = "content/SecureAgent"
 
-print(path)
+# print(path)
 
 SUPPORTED_EXTENSIONS = {'.py', '.js', '.tsx', '.jsx', '.ipynb', '.java',
                          '.cpp', '.ts', '.go', '.rs', '.vue', '.swift', '.c', '.h'}
@@ -119,7 +119,7 @@ def get_main_files_content(repo_path: str):
 
 file_content = get_main_files_content(path)
 
-file_content
+# file_content
 
 """# Embeddings"""
 
@@ -127,11 +127,11 @@ def get_huggingface_embeddings(text, model_name="sentence-transformers/all-mpnet
     model = SentenceTransformer(model_name)
     return model.encode(text)
 
-text = "I am a programmer"
+# text = "I am a programmer"
 
-embeddings = get_huggingface_embeddings(text)
+# embeddings = get_huggingface_embeddings(text)
 
-embeddings
+# embeddings
 
 
 
@@ -203,41 +203,41 @@ client = OpenAI(
     api_key=os.environ.get("GROQ_API_KEY")
 )
 
-query = "How are python files parsed?"
+# query = "How are python files parsed?"
 
-raw_query_embedding = get_huggingface_embeddings(query)
+# raw_query_embedding = get_huggingface_embeddings(query)
 
-raw_query_embedding
+# raw_query_embedding
 
-# Feel free to change the "top_k" parameter to be a higher or lower number
-top_matches = pinecone_index.query(vector=raw_query_embedding.tolist(), top_k=5, include_metadata=True, namespace="https://github.com/CoderAgent/SecureAgent")
+# # Feel free to change the "top_k" parameter to be a higher or lower number
+# top_matches = pinecone_index.query(vector=raw_query_embedding.tolist(), top_k=5, include_metadata=True, namespace="https://github.com/CoderAgent/SecureAgent")
 
-top_matches
+# top_matches
 
-contexts = [item['metadata']['text'] for item in top_matches['matches']]
+# contexts = [item['metadata']['text'] for item in top_matches['matches']]
 
-contexts
+# contexts
 
-augmented_query = "<CONTEXT>\n" + "\n\n-------\n\n".join(contexts[ : 10]) + "\n-------\n</CONTEXT>\n\n\n\nMY QUESTION:\n" + query
+# augmented_query = "<CONTEXT>\n" + "\n\n-------\n\n".join(contexts[ : 10]) + "\n-------\n</CONTEXT>\n\n\n\nMY QUESTION:\n" + query
 
-print(augmented_query)
+# print(augmented_query)
 
-system_prompt = f"""You are a Senior Software Engineer, specializing in TypeScript.
+# system_prompt = f"""You are a Senior Software Engineer, specializing in TypeScript.
 
-Answer any questions I have about the codebase, based on the code provided. Always consider all of the context provided when forming a response.
-"""
+# Answer any questions I have about the codebase, based on the code provided. Always consider all of the context provided when forming a response.
+# """
 
-llm_response = client.chat.completions.create(
-    model="llama-3.1-70b-versatile",
-    messages=[
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": augmented_query}
-    ]
-)
+# llm_response = client.chat.completions.create(
+#     model="llama-3.1-70b-versatile",
+#     messages=[
+#         {"role": "system", "content": system_prompt},
+#         {"role": "user", "content": augmented_query}
+#     ]
+# )
 
-response = llm_response.choices[0].message.content
+# response = llm_response.choices[0].message.content
 
-response
+# response
 
 
 
@@ -269,9 +269,9 @@ def perform_rag(query):
 
     return llm_response.choices[0].message.content
 
-response = perform_rag("How is the javascript parser used?")
+# response = perform_rag("How is the javascript parser used?")
 
-print(response)
+# print(response)
 
 
 

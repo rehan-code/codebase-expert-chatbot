@@ -58,7 +58,7 @@ if prompt := st.chat_input("What is up?"):
 
 
     # print("1")
-    # print(st.session_state.messages[0]['content'])
+    print(st.session_state.messages[0]['content'])
     # print("2")
     # response = bot.perform_rag(st.session_state.messages[0]['content'])
     st.session_state.messages.append({"role": "assistant", "content": response})
